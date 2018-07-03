@@ -38,7 +38,7 @@ class AbstractEffect(Hero, ABC):
     def apply_effect(self):
         pass
 
-    def get_stats(self):  # Возвращает итоговые хараетеристики
+    def get_stats(self):  # returns final states
         return self.apply_effect()
 
     def get_positive_effects(self):
@@ -54,14 +54,13 @@ class AbstractPositive(AbstractEffect):
         return self.base.get_positive_effects() + [self.__class__.__name__]
 
     def get_negative_effects(self):
-        # return super().get_positive_effects()
         return self.base.get_negative_effects()
 
 
 class Berserk(AbstractPositive):
     POSITIVE_POINTS = 7
     NEGATIVE_POINTS = 3
-    HP_NEGATIVE_POINTS = 50
+    HP_POSITIVE_POINTS = 50
 
     def apply_effect(self):
         stats_copy = self.base.get_stats()
@@ -74,7 +73,7 @@ class Berserk(AbstractPositive):
         stats_copy["Charisma"] -= self.NEGATIVE_POINTS
         stats_copy["Intelligence"] -= self.NEGATIVE_POINTS
 
-        stats_copy["HP"] -= self.HP_NEGATIVE_POINTS
+        stats_copy["HP"] += self.HP_POSITIVE_POINTS
 
         return stats_copy
 
@@ -149,11 +148,14 @@ if __name__ == "__main__":
     print(berserk.get_stats())
     print("----------------------")
 
-    # delete 2nd Berserk decorator
+    # delete the 2nd Berserk decorator
     # berserk.base = berserk.base.base
 
     # delete Blessing decorator
-    berserk.base.base.base = berserk.base.base.base.base
+    # berserk.base.base.base = berserk.base.base.base.base
+
+    # delete the 1st Berserk decorator
+    # berserk.base.base.base.base.base = berserk.base.base.base.base.base.base
 
     print(berserk.get_positive_effects())
     print(berserk.get_negative_effects())
