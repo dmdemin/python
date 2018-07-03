@@ -1,23 +1,35 @@
 from abc import ABC, abstractmethod
 
 
+HP_name = "HP"
+MP_name = "MP"
+SP_name = "SP"
+
+Strength_name = "Strength"
+Perception_name = "Perception"
+Endurance_name = "Endurance"
+Charisma_name = "Charisma"
+Intelligence_name = "Intelligence"
+Agility_name = "Agility"
+Luck_name = "Luck"
+
 class Hero:
     def __init__(self):
         self.positive_effects = []
         self.negative_effects = []
 
         self.stats = {
-            "HP": 128,
-            "MP": 42,
-            "SP": 100,
+            HP_name: 128,
+            MP_name: 42,
+            SP_name: 100,
 
-            "Strength": 15,
-            "Perception": 4,
-            "Endurance": 8,
-            "Charisma": 2,
-            "Intelligence": 3,
-            "Agility": 8,
-            "Luck": 1
+            Strength_name: 15,
+            Perception_name: 4,
+            Endurance_name: 8,
+            Charisma_name: 2,
+            Intelligence_name: 3,
+            Agility_name: 8,
+            Luck_name: 1
         }
 
     def get_positive_effects(self):
@@ -64,16 +76,16 @@ class Berserk(AbstractPositive):
 
     def apply_effect(self):
         stats_copy = self.base.get_stats()
-        stats_copy["Strength"] += self.POSITIVE_POINTS
-        stats_copy["Endurance"] += self.POSITIVE_POINTS
-        stats_copy["Agility"] += self.POSITIVE_POINTS
-        stats_copy["Luck"] += self.POSITIVE_POINTS
+        stats_copy[Strength_name] += self.POSITIVE_POINTS
+        stats_copy[Endurance_name] += self.POSITIVE_POINTS
+        stats_copy[Agility_name] += self.POSITIVE_POINTS
+        stats_copy[Luck_name] += self.POSITIVE_POINTS
 
-        stats_copy["Perception"] -= self.NEGATIVE_POINTS
-        stats_copy["Charisma"] -= self.NEGATIVE_POINTS
-        stats_copy["Intelligence"] -= self.NEGATIVE_POINTS
+        stats_copy[Perception_name] -= self.NEGATIVE_POINTS
+        stats_copy[Charisma_name] -= self.NEGATIVE_POINTS
+        stats_copy[Intelligence_name] -= self.NEGATIVE_POINTS
 
-        stats_copy["HP"] += self.HP_POSITIVE_POINTS
+        stats_copy[HP_name] += self.HP_POSITIVE_POINTS
 
         return stats_copy
 
@@ -83,13 +95,13 @@ class Blessing(AbstractPositive):
 
     def apply_effect(self):
         stats_copy = self.base.get_stats()
-        stats_copy["Strength"] += self.POSITIVE_POINTS
-        stats_copy["Endurance"] += self.POSITIVE_POINTS
-        stats_copy["Agility"] += self.POSITIVE_POINTS
-        stats_copy["Luck"] += self.POSITIVE_POINTS
-        stats_copy["Perception"] += self.POSITIVE_POINTS
-        stats_copy["Charisma"] += self.POSITIVE_POINTS
-        stats_copy["Intelligence"] += self.POSITIVE_POINTS
+        stats_copy[Strength_name] += self.POSITIVE_POINTS
+        stats_copy[Endurance_name] += self.POSITIVE_POINTS
+        stats_copy[Agility_name] += self.POSITIVE_POINTS
+        stats_copy[Luck_name] += self.POSITIVE_POINTS
+        stats_copy[Perception_name] += self.POSITIVE_POINTS
+        stats_copy[Charisma_name] += self.POSITIVE_POINTS
+        stats_copy[Intelligence_name] += self.POSITIVE_POINTS
 
         return stats_copy
 
@@ -107,19 +119,19 @@ class Weakness(AbstractNegative):
 
     def apply_effect(self):
         stats_copy = self.base.get_stats()
-        stats_copy["Strength"] -= self.NEGATIVE_POINTS
-        stats_copy["Endurance"] -= self.NEGATIVE_POINTS
-        stats_copy["Agility"] -= self.NEGATIVE_POINTS
+        stats_copy[Strength_name] -= self.NEGATIVE_POINTS
+        stats_copy[Endurance_name] -= self.NEGATIVE_POINTS
+        stats_copy[Agility_name] -= self.NEGATIVE_POINTS
 
         return stats_copy
 
 
 class EvilEye(AbstractNegative):
-    NEGATIVE_POINTS = 10;
+    NEGATIVE_POINTS = 10
 
     def apply_effect(self):
         stats_copy = self.base.get_stats()
-        stats_copy["Luck"] -= self.NEGATIVE_POINTS
+        stats_copy[Luck_name] -= self.NEGATIVE_POINTS
         return stats_copy
 
 
@@ -128,13 +140,13 @@ class Curse(AbstractNegative):
 
     def apply_effect(self):
         stats_copy = self.base.get_stats()
-        stats_copy["Strength"] -= self.NEGATIVE_POINTS
-        stats_copy["Endurance"] -= self.NEGATIVE_POINTS
-        stats_copy["Agility"] -= self.NEGATIVE_POINTS
-        stats_copy["Luck"] -= self.NEGATIVE_POINTS
-        stats_copy["Perception"] -= self.NEGATIVE_POINTS
-        stats_copy["Charisma"] -= self.NEGATIVE_POINTS
-        stats_copy["Intelligence"] -= self.NEGATIVE_POINTS
+        stats_copy[Strength_name] -= self.NEGATIVE_POINTS
+        stats_copy[Endurance_name] -= self.NEGATIVE_POINTS
+        stats_copy[Agility_name] -= self.NEGATIVE_POINTS
+        stats_copy[Luck_name] -= self.NEGATIVE_POINTS
+        stats_copy[Perception_name] -= self.NEGATIVE_POINTS
+        stats_copy[Charisma_name] -= self.NEGATIVE_POINTS
+        stats_copy[Intelligence_name] -= self.NEGATIVE_POINTS
 
         return stats_copy
 
