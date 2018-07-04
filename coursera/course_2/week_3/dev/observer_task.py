@@ -13,7 +13,8 @@ class ObservableEngine(Engine):
         self.__subscribers.add(subscriber)
 
     def unsubscribe(self, subscriber):
-        self.__subscribers.remove(subscriber)
+        if subscriber in self.__subscribers:
+            self.__subscribers.remove(subscriber)
 
     def notify(self, achievement):
         for subscriber in self.__subscribers:
@@ -45,11 +46,15 @@ class FullNotificationPrinter(AbstractObserver):
 
 if __name__ == "__main__":
     short_notification_printer = ShortNotificationPrinter()
+    short_notification_printer_2 = ShortNotificationPrinter()
     full_notification_printer = FullNotificationPrinter()
 
     engine = ObservableEngine()
     engine.subscribe(short_notification_printer)
+    engine.subscribe(short_notification_printer_2)
     engine.subscribe(full_notification_printer)
+
+    engine.unsubscribe(short_notification_printer_2)
 
     achievement1= {"title": "FirstLevel", "text": "You reached 1 level"}
     achievement2= {"title": "ZombiesKiller", "text": "You killed 20 zombies"}
@@ -59,4 +64,5 @@ if __name__ == "__main__":
     engine.notify(achievement1)
 
     print("short_notification_printer: ", short_notification_printer.achievements)
+    print("short_notification_printer2: ", short_notification_printer_2.achievements)
     print("full_notification_printer: ", *full_notification_printer.achievements, sep='\n')
