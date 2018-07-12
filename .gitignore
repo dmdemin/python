@@ -3,3 +3,4 @@
 **/week_1/dev/testing
 **.ipynb_checkpoints/
 *.ipynb
+**/__pycache__/
